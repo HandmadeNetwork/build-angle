@@ -47,7 +47,7 @@ if not exist depot_tools (
   popd
 )
 
-rem *** downlaod angle source ***
+rem *** download angle source ***
 
 if exist angle.src (
   pushd angle.src
@@ -69,7 +69,7 @@ pushd angle.src
 
 set DEPOT_TOOLS_WIN_TOOLCHAIN=0
 call gclient sync || exit /b 1
-call gn gen out/Release --args="angle_build_all=false is_debug=false angle_has_frame_capture=false angle_enable_gl=false angle_enable_vulkan=false angle_enable_d3d9=false angle_enable_null=false" || exit /b 1
+call gn gen out/Release --args="angle_build_all=false is_debug=false is_component_build=false angle_has_frame_capture=false angle_enable_gl=false angle_enable_vulkan=false angle_enable_d3d9=false angle_enable_null=false" || exit /b 1
 call git apply -p0 ..\angle.patch || exit /b 1
 call autoninja -C out/Release libEGL libGLESv2 libGLESv1_CM || exit /b 1
 popd
@@ -111,7 +111,7 @@ if "%GITHUB_WORKFLOW%" neq "" (
   :dateok
   set BUILD_DATE=%LDATE:~0,4%-%LDATE:~4,2%-%LDATE:~6,2%
 
-  %SZIP% a -mx=9 angle-%BUILD_DATE%.zip angle || exit /b 1
+  %SZIP% a -mx=9 angle-%BUILD_OS%-%BUILD_DATE%.zip angle || exit /b 1
 
   echo ::set-output name=ANGLE_COMMIT::%ANGLE_COMMIT%
   echo ::set-output name=BUILD_DATE::%BUILD_DATE%
