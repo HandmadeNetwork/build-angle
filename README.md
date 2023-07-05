@@ -1,8 +1,5 @@
-Automatic weekly build of [angle][] OpenGL ES implementation for 64-bit Windows.
+Automatic weekly builds of [ANGLE](http://angleproject.org/) for use in Orca.
 
-Download binary build as zip archive from [latest release][] page.
+Download the zip for your platform from the [latest release](https://github.com/HandmadeNetwork/build-angle/releases/latest).
 
-To build locally run `build.cmd` batch file, make sure you have installed all necessary dependencies (see the beginning of file).
-
-[angle]: http://angleproject.org/
-[latest release]: https://github.com/mmozeiko/build-angle/releases/latest
+To build locally run `build.cmd` on Windows or `build.sh` on Mac. Make sure you have installed all necessary dependencies (see the beginning of the file).
