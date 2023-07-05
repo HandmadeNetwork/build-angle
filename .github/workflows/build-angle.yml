@@ -65,14 +65,14 @@ jobs:
       - build-mac
     steps:
       - name: Download Windows artifacts
-        uses: dawidd6/action-download-artifact@v2.27.0
+        uses: marcofaggian/action-download-multiple-artifacts@v4.0.1
         with:
-          workflow: Build (Windows)
+          workflow: build-win
 
       - name: Download Mac artifacts
-        uses: dawidd6/action-download-artifact@v2.27.0
+        uses: marcofaggian/action-download-multiple-artifacts@v4.0.1
         with:
-          workflow: Build (Mac)
+          workflow: build-mac
 
       - name: Create release
         env:
