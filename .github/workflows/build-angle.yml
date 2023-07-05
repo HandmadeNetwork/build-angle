@@ -81,5 +81,5 @@ jobs:
               assets+=("-a" "$asset")
             done
           done
-          tag_name="${{ needs.build-win.outputs.BUILD_DATE }}-test1"
+          tag_name="${{ needs.build-win.outputs.BUILD_DATE }}-test2"
           hub release create "${assets[@]}" -m "$tag_name" -m "Angle commit: [${{ needs.build-win.outputs.ANGLE_COMMIT }}](https://github.com/google/angle/commit/${{ needs.build-win.outputs.ANGLE_COMMIT }})" "$tag_name"

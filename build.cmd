@@ -7,7 +7,7 @@ rem *** temporarily create dummy zips
 for /F "skip=1" %%D in ('WMIC OS GET LocalDateTime') do (set LDATE=%%D & goto :dateok)
 :dateok
 set BUILD_DATE=%LDATE:~0,4%-%LDATE:~4,2%-%LDATE:~6,2%
-copy NUL angle-%BUILD_OS%-%BUILD_DATE%.zip
+echo . > angle-%BUILD_OS%-%BUILD_DATE%.zip
 echo ::set-output name=ANGLE_COMMIT::PIZZAPIZZA
 echo ::set-output name=BUILD_DATE::%BUILD_DATE%
 exit /b 0
