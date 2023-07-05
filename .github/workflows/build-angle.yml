@@ -20,19 +20,20 @@ jobs:
       ANGLE_COMMIT: ${{ steps.build.outputs.ANGLE_COMMIT }}
       BUILD_DATE: ${{ steps.build.outputs.BUILD_DATE }}
     steps:
-      - name: checkout
+      - name: Check out
         uses: actions/checkout@v2
 
-      - name: build
+      - name: Build
         id: build
         shell: cmd
         run: call build.cmd
 
-      - name: upload artifact
+      - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
           name: "angle-${{ matrix.os }}-${{ steps.build.outputs.BUILD_DATE }}.zip"
           path: "angle-${{ matrix.os }}-${{ steps.build.outputs.BUILD_DATE }}.zip"
+          if-no-files-found: error
 
   build-mac:
     name: Build (Mac)
@@ -43,18 +44,19 @@ jobs:
     env:
       BUILD_OS: ${{ matrix.os }}
     steps:
-      - name: checkout
+      - name: Check out
         uses: actions/checkout@v2
 
-      - name: build
+      - name: Build
         id: build
         run: ./build.sh
 
-      - name: upload artifact
+      - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
           name: "angle-${{ matrix.os }}-${{ steps.build.outputs.BUILD_DATE }}.zip"
           path: "angle-${{ matrix.os }}-${{ steps.build.outputs.BUILD_DATE }}.zip"
+          if-no-files-found: error
 
   release:
     runs-on: ubuntu-latest
@@ -62,17 +64,17 @@ jobs:
       - build-win
       - build-mac
     steps:
-      - name: download windows artifacts
+      - name: Download Windows artifacts
         uses: dawidd6/action-download-artifact@v2.27.0
         with:
-          workflow: build-win
+          workflow: Build (Windows)
 
-      - name: download mac artifacts
+      - name: Download Mac artifacts
         uses: dawidd6/action-download-artifact@v2.27.0
         with:
-          workflow: build-mac
+          workflow: Build (Mac)
 
-      - name: create release
+      - name: Create release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |

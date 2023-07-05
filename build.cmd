@@ -3,6 +3,14 @@ setlocal enabledelayedexpansion
 
 set PATH=%CD%\depot_tools;%PATH%
 
+rem *** temporarily create dummy zips
+for /F "skip=1" %%D in ('WMIC OS GET LocalDateTime') do (set LDATE=%%D & goto :dateok)
+:dateok
+set BUILD_DATE=%LDATE:~0,4%-%LDATE:~4,2%-%LDATE:~6,2%
+
+copy NUL angle-%BUILD_OS%-%BUILD_DATE%.zip
+exit /b 0
+
 rem *** check dependencies ***
 
 where /q python.exe || (
