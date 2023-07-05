@@ -64,24 +64,8 @@ jobs:
       - build-win
       - build-mac
     steps:
-      - name: Download a Build Artifact
+      - name: Download artifacts
         uses: actions/download-artifact@v2.1.1
-        with:
-          path: path/to/artifacts
-
-      - name: Display structure of downloaded files
-        run: ls -R
-        working-directory: path/to/artifacts
-
-      - name: Download Windows artifacts
-        uses: marcofaggian/action-download-multiple-artifacts@v4.0.1
-        with:
-          workflow: build-win
-
-      - name: Download Mac artifacts
-        uses: marcofaggian/action-download-multiple-artifacts@v4.0.1
-        with:
-          workflow: build-mac
 
       - name: Create release
         env:
