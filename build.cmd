@@ -8,9 +8,8 @@ for /F "skip=1" %%D in ('WMIC OS GET LocalDateTime') do (set LDATE=%%D & goto :d
 :dateok
 set BUILD_DATE=%LDATE:~0,4%-%LDATE:~4,2%-%LDATE:~6,2%
 echo . > angle-%BUILD_OS%-%BUILD_DATE%.zip
-echo "ANGLE_COMMIT=PIZZAPIZZA" >> %GITHUB_OUTPUT%
-echo "BUILD_DATE=%BUILD_DATE%" >> %GITHUB_OUTPUT%
-type %GITHUB_OUTPUT%
+echo ANGLE_COMMIT=PIZZAPIZZA >> %GITHUB_OUTPUT%
+echo BUILD_DATE=%BUILD_DATE% >> %GITHUB_OUTPUT%
 exit /b 0
 
 rem *** check dependencies ***
