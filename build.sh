@@ -2,7 +2,7 @@
 
 set -euxo pipefail
 
-export PATH="$(pwd)/depot_tools;$PATH"
+export PATH="$(pwd)/depot_tools:$PATH"
 
 # Download depot_tools
 if [ ! -d "depot_tools" ]; then
